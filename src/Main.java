@@ -13,13 +13,7 @@ public class Main {
         employees[7] = new Employee("Узбеков Узбек Узбекович", 45000, 3);
         employees[8] = new Employee("Огай Максим Витальевич", 375000, 4);
         employees[9] = new Employee("Савин Илья Иванович", 55000, 5);
-        printEmployeers(employees);
-        System.out.println(sumSalary(employees));
-        System.out.println(findMaxSalary(employees));
-        printFullName(employees);
-        calculateAverageSalary(employees);
-        findMinSalary(employees);
-        System.out.println(calculateAverageSalary(employees));
+        System.out.println(findMaxSalaryUseDepartment(employees, 1));
     }
 
     private static void printEmployeers(Employee[] employees) {
@@ -46,6 +40,7 @@ public class Main {
         }
         return employees[minSalary];
     }
+
     private static Employee findMaxSalary(Employee[] employees) {
         int maxSalary = 0;
         for (int i = 0; i < employees.length; i++) {
@@ -55,14 +50,38 @@ public class Main {
         }
         return employees[maxSalary];
     }
+
     private static double calculateAverageSalary(Employee[] employees) {
-        int salarySum =  sumSalary(employees);
+        int salarySum = sumSalary(employees);
         double averageSum = (double) salarySum / employees.length;
         return salarySum;
     }
+
     private static void printFullName(Employee[] employees) {
         for (Employee employee : employees) {
             System.out.println(employee.getFullName());
         }
     }
+
+    private static void indexationSalary(Employee[] employees, double indexation) {
+        for (int i = 0; i < employees.length; i++) {
+            int valueSalary = employees[i].getSalary();
+            double updateSalary = valueSalary * indexation;
+            employees[i].setSalary((int) updateSalary);
+        }
+    }
+
+    // Сумма зарплат по отделу
+    private static int findSumSalaryUseDepartment(Employee[] employees, int valueDepartment) {
+        int sumSalary = 0;
+        for (Employee employee : employees) {
+            if (employee.getDepartment() == valueDepartment) {
+                sumSalary += employee.getSalary();
+            }
+        }
+        return sumSalary;
+    }
 }
+
+
+
